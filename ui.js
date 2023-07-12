@@ -54,3 +54,34 @@ UI.prototype.displayMessages = function(message,type){
         div.remove();
     },2000);
 }
+
+UI.prototype.loadAllCars = function(cars){
+    const carList = document.getElementById("cars");
+    cars.forEach(function(car){
+        carList.innerHTML +=  `<tr>
+            <td><img src="${car.url}" class="img-fluid img-thumbnail"></td>
+            <td>${car.title}</td>
+            <td>${car.price}</td>
+            <td><a href="#" id = "delete-car" class = "btn btn-danger">Aracı Sil</a></td>
+      </tr>
+      `
+    });
+}
+
+UI.prototype.deleteCarFromUI = function(element){
+    element.parentElement.parentElement.remove();
+}
+
+UI.prototype.clearAllCarsFromUI = function(){
+    const carList = document.getElementById("cars");
+
+    carList.innerHTML = "";
+
+    while(carList.firstElementChild !== null){
+        carList.firstElementChild.remove();
+    }
+}
+
+Storage.prototype.clearAllCarsFromStorage = function(){
+    localStorage.removeItem("cars");
+}
